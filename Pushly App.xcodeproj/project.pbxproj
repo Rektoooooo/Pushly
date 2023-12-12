@@ -24,6 +24,7 @@
 		EC3212F02AF105B40052D6FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3212EF2AF105B40052D6FB /* SettingsView.swift */; };
 		EC3212F22AF23CA80052D6FB /* CalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3212F12AF23CA80052D6FB /* CalendarDayView.swift */; };
 		EC8A7FBC2B0F3D93004B870A /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */; };
+		ECB23EAC2B25F59900686DA7 /* UserDefaultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		EC3212EF2AF105B40052D6FB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EC3212F12AF23CA80052D6FB /* CalendarDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayView.swift; sourceTree = "<group>"; };
 		EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				EC0ADB7D2AF04E4600FE15D5 /* StartedView.swift */,
 				EC3212EB2AF102620052D6FB /* MainView.swift */,
 				EC3212EF2AF105B40052D6FB /* SettingsView.swift */,
+				ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */,
 				EC3212ED2AF104D20052D6FB /* CalendarView.swift */,
 				EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */,
 				EC2C4E942B0B7DB60095132F /* DayState.swift */,
@@ -291,6 +294,7 @@
 				EC3212F02AF105B40052D6FB /* SettingsView.swift in Sources */,
 				EC3212EE2AF104D20052D6FB /* CalendarView.swift in Sources */,
 				EC3212EC2AF102620052D6FB /* MainView.swift in Sources */,
+				ECB23EAC2B25F59900686DA7 /* UserDefaultsView.swift in Sources */,
 				EC0ADB522AF02D1500FE15D5 /* Pushly_AppApp.swift in Sources */,
 				EC0ADB7E2AF04E4600FE15D5 /* StartedView.swift in Sources */,
 				EC3212F22AF23CA80052D6FB /* CalendarDayView.swift in Sources */,
@@ -460,7 +464,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Pushly App/Preview Content\"";
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				ENABLE_PREVIEWS = YES;
@@ -489,7 +493,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Pushly App/Preview Content\"";
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				ENABLE_PREVIEWS = YES;

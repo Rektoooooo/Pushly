@@ -95,8 +95,7 @@ struct StartedView: View {
         updateExercisesToday()
         checkIfGoalCompleated()
         print("App refreshed \(Date())")
-        print("Days compleated : \(config.completedDays)")
-        printUserDefaults() 
+        // printUserDefaults()
     }
     
     private func setTimer() {
@@ -105,7 +104,7 @@ struct StartedView: View {
         }
     }
     
-    private func printUserDefaults() {
+    func printUserDefaults() {
         for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
             print("\(key) = \(value) \n")
         }
@@ -135,7 +134,6 @@ struct StartedView: View {
     func updateDailyChallengeIfNeeded(config: Config) {
         let now = Date()
         let calendar = Calendar.current
-        
         if !calendar.isDate(config.lastUpdateDate, inSameDayAs: now) {
             if let yesterday = calendar.date(byAdding: .day, value: -1, to: now),
                calendar.isDate(config.lastUpdateDate, inSameDayAs: yesterday) {
@@ -147,9 +145,19 @@ struct StartedView: View {
 
     private func updateDailyChallenge() {
         updateExercisesToday()
-        config.dailyProgress += 1
+        config.dailyProgress += numberOfNightsBetween(startDate: config.lastUpdateDate)
         config.exercisesDone = 0
         print("Updated challange")
+    }
+    
+    private func numberOfNightsBetween(startDate: Date) -> Int {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: startDate)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        guard let midnight = calendar.date(from: components) else { return 0 }
+        return calendar.dateComponents([.day], from: midnight, to: Date.now).day ?? 0
     }
     
     private func updateExercisesToday() {

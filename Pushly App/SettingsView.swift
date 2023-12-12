@@ -30,6 +30,11 @@ struct SettingsView: View {
                 Section(header: Text("Compleated days")) {
                     Text("\(config.completedDays.sorted().map { String($0) }.joined(separator: ", "))")
                 }
+                Section(header: Text("User defaults")) {
+                    NavigationLink("User defaults") {
+                        UserDefaultsView()
+                    }
+                }
             }
             .navigationTitle(Text("Settings"))
         }
