@@ -7,6 +7,9 @@
 
 import Foundation
 
-enum DayState {
-    case success, failed, current, upcoming
+enum DayState: String {
+    case success
+    case failed
+    case current
+    case upcoming
 }

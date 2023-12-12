@@ -27,25 +27,25 @@ class Config: ObservableObject {
         }
     }
     
-    @Published var lenght: Int {
+    @Published var lenght: UInt {
         didSet {
             UserDefaults.standard.set(lenght, forKey: "lenght")
         }
     }
     
-    @Published var exercisesDone: Int {
+    @Published var exercisesDone: UInt {
         didSet {
             UserDefaults.standard.set(exercisesDone, forKey: "exercisesDone")
         }
     }
     
-    @Published var dailyProgress: Int {
+    @Published var dailyProgress: UInt {
         didSet {
             UserDefaults.standard.set(dailyProgress, forKey: "dailyProgress")
         }
     }
     
-    @Published var exercisesToday: Int {
+    @Published var exercisesToday: UInt {
         didSet {
             UserDefaults.standard.set(exercisesToday, forKey: "exercisesToday")
         }
@@ -57,26 +57,26 @@ class Config: ObservableObject {
         }
     }
     
-        @Published var completedDays: Set<Int> {
+        @Published var completedDays: Set<UInt> {
             didSet {
                 UserDefaults.standard.set(Array(completedDays), forKey: "completedDays")
             }
         }
 
-    init(challangeStarted: Bool, startingCount: Int, increment: Int, lenght: Int, exercisesDone: Int, dailyProgress: Int, exercisesToday: Int, lastUpdateDate: Date, completedDays: Set<Int>) {
+    init(challangeStarted: Bool, startingCount: UInt, increment: UInt, lenght: UInt, exercisesDone: UInt, dailyProgress: UInt, exercisesToday: UInt, lastUpdateDate: Date, completedDays: Set<UInt>) {
             self.challangeStarted = UserDefaults.standard.object(forKey: "challangeStarted") as? Bool ?? false
             self.startingCount = UserDefaults.standard.object(forKey: "startingCount") as? String ?? ""
             self.increment = UserDefaults.standard.object(forKey: "increment") as? String ?? ""
-            self.lenght = UserDefaults.standard.object(forKey: "lenght") as? Int ?? 0
-            self.exercisesDone = UserDefaults.standard.object(forKey: "exercisesDone") as? Int ?? 0
-            self.dailyProgress = UserDefaults.standard.object(forKey: "dailyProgress") as? Int ?? 1
-            self.exercisesToday = UserDefaults.standard.object(forKey: "exercisesToday") as? Int ?? 0
+            self.lenght = UserDefaults.standard.object(forKey: "lenght") as? UInt ?? 0
+            self.exercisesDone = UserDefaults.standard.object(forKey: "exercisesDone") as? UInt ?? 0
+            self.dailyProgress = UserDefaults.standard.object(forKey: "dailyProgress") as? UInt ?? 1
+            self.exercisesToday = UserDefaults.standard.object(forKey: "exercisesToday") as? UInt ?? 0
             self.lastUpdateDate = UserDefaults.standard.object(forKey: "lastUpdateDate") as? Date ?? Date.now
-            let completedArray = UserDefaults.standard.array(forKey: "completedDays") as? [Int] ?? []
+            let completedArray = UserDefaults.standard.array(forKey: "completedDays") as? [UInt] ?? []
             self.completedDays = Set(completedArray)
         }
         
-    func markDayAsComplete(day: Int) { 
+    func markDayAsComplete(day: UInt) {
         completedDays.insert(day)
         UserDefaults.standard.set(Array(completedDays), forKey: "completedDays")
     }

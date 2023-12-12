@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct SetUpView: View {
     
     @EnvironmentObject var config: Config
     @State var isPresented: Bool = false
@@ -48,20 +48,20 @@ struct ContentView: View {
             Spacer()
         }
         .fullScreenCover(isPresented: $isPresented, content: {
-            MainView()
+            ToolBar()
         })
     }
     
     func startChallange() {
         config.challangeStarted = true
         isPresented.toggle()
-        config.lenght = Int(challangeLenght) ?? 0
-        config.exercisesToday = Int(config.startingCount) ?? 0 + (Int(config.increment) ?? 0 * config.dailyProgress)
+        config.lenght = UInt(challangeLenght) ?? 0
+        config.exercisesToday = UInt(config.startingCount) ?? 0 + (UInt(config.increment) ?? 0 * config.dailyProgress)
         print("Variables pushed to config")
     }
     
 }
 
 #Preview {
-    ContentView(challangeLenght: "")
+    SetUpView(challangeLenght: "")
 }

@@ -6,24 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CalendarDayView: View {
+    
     @State var count:Int
     @State var state: DayState
-    var body: some View {
-        Text("\(count)")
-            .frame(width: 30, height: 30)
-            .font(.system(size: 16))
-            .foregroundColor(.black)
-            .fontWeight(.bold)
-            .padding(2)
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(backgroundColor(for: state), lineWidth: 4)
-            )
-            .background(backgroundColor(for: state))
-    }
+    @EnvironmentObject var config: Config
     
+    @Environment(\.modelContext) var modelContext
+   // @Query var days: [Day]
+
+    var body: some View {
+        VStack {
+            List {
+            }
+            .navigationTitle("Day \(count)")
+        }
+        .onAppear() {
+        }
+    }
     private func backgroundColor(for state: DayState) -> Color {
           switch state {
               case .success:

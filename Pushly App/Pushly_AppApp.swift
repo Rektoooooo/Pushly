@@ -10,13 +10,13 @@ import SwiftUI
 @main
 struct Pushly_AppApp: App {
     var body: some Scene {
-        let config = Config(challangeStarted: false, startingCount: 0, increment: 0, lenght: 0, exercisesDone: 0, dailyProgress: 0, exercisesToday: 0, lastUpdateDate: Date.now, completedDays: Set<Int>())
+        let config = Config(challangeStarted: false, startingCount: 0, increment: 0, lenght: 0, exercisesDone: 0, dailyProgress: 0, exercisesToday: 0, lastUpdateDate: Date.now, completedDays: Set<UInt>())
         WindowGroup {
             if config.challangeStarted {
-                MainView()
+                ToolBar()
                     .environmentObject(config)
             } else {
-                ContentView(challangeLenght: "")
+                SetUpView(challangeLenght: "")
                     .environmentObject(config)
             }
         }

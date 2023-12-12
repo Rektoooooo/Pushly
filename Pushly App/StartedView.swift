@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct StartedView: View {
     
@@ -13,6 +14,9 @@ struct StartedView: View {
     @State private var timeRemaining: TimeInterval = 0
     @State var midnight:Date = Date()
     @State var isValueChanged: Bool = false
+    
+    @Query(sort:\Day.dayNumber, order: .forward) var days: [Day]
+    @Environment(\.modelContext) var modelContext
 
     var body: some View {
         VStack {
@@ -58,7 +62,7 @@ struct StartedView: View {
                 Slider(
                     value: Binding(
                         get: { Double(config.exercisesDone) },
-                        set: { config.exercisesDone = Int($0) }
+                        set: { config.exercisesDone = UInt($0) }
                     ),
                     in: 0...Double(config.exercisesToday)
                 )
@@ -67,6 +71,7 @@ struct StartedView: View {
             Button(action: {
                 isValueChanged = false
                 refreshApp()
+                addDay(dayNumber: UInt(config.dailyProgress))
             }, label: {
                 Text("Save")
                     .padding()
@@ -131,7 +136,7 @@ struct StartedView: View {
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
-    func updateDailyChallengeIfNeeded(config: Config) {
+    private func updateDailyChallengeIfNeeded(config: Config) {
         let now = Date()
         let calendar = Calendar.current
         if !calendar.isDate(config.lastUpdateDate, inSameDayAs: now) {
@@ -150,20 +155,20 @@ struct StartedView: View {
         print("Updated challange")
     }
     
-    private func numberOfNightsBetween(startDate: Date) -> Int {
+    private func numberOfNightsBetween(startDate: Date) -> UInt {
         let calendar = Calendar.current
         var components = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: startDate)
         components.hour = 0
         components.minute = 0
         components.second = 0
         guard let midnight = calendar.date(from: components) else { return 0 }
-        return calendar.dateComponents([.day], from: midnight, to: Date.now).day ?? 0
+        return UInt(calendar.dateComponents([.day], from: midnight, to: Date.now).day ?? 0)
     }
     
     private func updateExercisesToday() {
-        let progress:Int = config.dailyProgress - 1
-        let inc:Int = Int(config.increment) ?? 0
-        let start:Int = Int(config.startingCount) ?? 0
+        let progress:UInt = config.dailyProgress - 1
+        let inc:UInt = UInt(config.increment) ?? 0
+        let start:UInt = UInt(config.startingCount) ?? 0
         config.exercisesToday = start + (inc * progress)
     }
     
@@ -172,6 +177,13 @@ struct StartedView: View {
             config.markDayAsComplete(day: config.dailyProgress)
         } else {
             config.completedDays.remove(config.dailyProgress)
+        }
+    }
+    
+    func addDay(dayNumber: UInt) {
+        if config.exercisesDone >= config.exercisesToday {
+            let day = Day(dayNumber: dayNumber, status: "success", date: .now, dateCompleated: .now, repsCompleated: config.exercisesDone)
+             modelContext.insert(day)
         }
     }
     

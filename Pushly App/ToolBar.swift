@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct ToolBar: View {
     @EnvironmentObject var config: Config
        var body: some View {
            TabView {
@@ -42,5 +42,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    ToolBar()
 }
