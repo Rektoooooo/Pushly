@@ -28,7 +28,7 @@ struct UserDefaultsView: View {
     }
     
     func printUserDefaults() -> [UserData] {
-        let keys = ["startingCount","increment","lastUpdateDate","lenght","dailyProgress","exercisesDone","completedDays","exercisesToday"]
+        let keys = ["startingCount","increment","lastUpdateDate","lenght","dailyProgress","exercisesDone","completedDays","exercisesToday","lastUpdateDate","daysDescription"]
         let userDefaults = UserDefaults.standard.dictionaryRepresentation()
         var result:[UserData] = []
         keys.forEach { key in

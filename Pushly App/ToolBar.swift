@@ -34,7 +34,6 @@ struct ToolBar: View {
                }
                .toolbar(.visible, for: .tabBar)
                .toolbarBackground(.black, for: .tabBar)
-               .toolbarColorScheme(.dark, for: .tabBar)
 
            }
            .environmentObject(config)

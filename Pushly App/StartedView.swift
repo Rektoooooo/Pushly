@@ -7,16 +7,18 @@
 
 import SwiftUI
 import SwiftData
+import NotificationCenter
 
 struct StartedView: View {
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @EnvironmentObject var config: Config
     @State private var timeRemaining: TimeInterval = 0
     @State var midnight:Date = Date()
     @State var isValueChanged: Bool = false
     
-    @Query(sort:\Day.dayNumber, order: .forward) var days: [Day]
-    @Environment(\.modelContext) var modelContext
+//    @Query(sort:\Day.dayNumber, order: .forward) var days: [Day]
+//    @Environment(\.modelContext) var modelContext
 
     var body: some View {
         VStack {
@@ -86,6 +88,8 @@ struct StartedView: View {
             Spacer()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+          //  config.lastUpdateDate = Date.init(timeIntervalSinceNow: -86400 * 2)
+          //  print("last date updated : \(config.lastUpdateDate)")
             refreshApp()
         }
         .onFirstAppear {
@@ -95,12 +99,21 @@ struct StartedView: View {
     }
     
     private func refreshApp() {
-        updateDailyChallengeIfNeeded(config: config)
+        updateDailyChallengeIfNeeded()
         refreshTimer()
         updateExercisesToday()
         checkIfGoalCompleated()
+        loadData()
         print("App refreshed \(Date())")
-        // printUserDefaults()
+    }
+    
+    func loadData() {
+        let decoder = JSONDecoder()
+        if let savedDaysData = UserDefaults.standard.object(forKey: "daysDescription") as? Data {
+            if let loadedDays = try? decoder.decode([Day].self, from: savedDaysData) {
+                config.daysDescription = loadedDays
+            }
+        }
     }
     
     private func setTimer() {
@@ -136,22 +149,19 @@ struct StartedView: View {
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
-    private func updateDailyChallengeIfNeeded(config: Config) {
-        let now = Date()
+    func updateDailyChallengeIfNeeded() {
         let calendar = Calendar.current
-        if !calendar.isDate(config.lastUpdateDate, inSameDayAs: now) {
-            if let yesterday = calendar.date(byAdding: .day, value: -1, to: now),
-               calendar.isDate(config.lastUpdateDate, inSameDayAs: yesterday) {
+        if !calendar.isDateInToday(config.lastUpdateDate) {
                 updateDailyChallenge()
             }
-            config.lastUpdateDate = now
-        }
     }
 
     private func updateDailyChallenge() {
         updateExercisesToday()
         config.dailyProgress += numberOfNightsBetween(startDate: config.lastUpdateDate)
         config.exercisesDone = 0
+        config.lastUpdateDate = Date()
+        config.updateLogs.append(Date.now)
         print("Updated challange")
     }
     
@@ -166,10 +176,7 @@ struct StartedView: View {
     }
     
     private func updateExercisesToday() {
-        let progress:UInt = config.dailyProgress - 1
-        let inc:UInt = UInt(config.increment) ?? 0
-        let start:UInt = UInt(config.startingCount) ?? 0
-        config.exercisesToday = start + (inc * progress)
+        config.exercisesToday = config.startingCount + (config.increment * (config.dailyProgress - 1))
     }
     
     private func checkIfGoalCompleated() {
@@ -182,11 +189,23 @@ struct StartedView: View {
     
     func addDay(dayNumber: UInt) {
         if config.exercisesDone >= config.exercisesToday {
-            let day = Day(dayNumber: dayNumber, status: "success", date: .now, dateCompleated: .now, repsCompleated: config.exercisesDone)
-             modelContext.insert(day)
+            config.daysDescription[Int(dayNumber)] = Day(dayNumber:config.dailyProgress, status: "Success",date: currentTimeString(), dateCompleated: todaysDateString(), repsCompleated: config.exercisesDone)
+            print("Inserted day at index : \(dayNumber)")
         }
     }
     
+    func currentTimeString() -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .none
+        return formatter.string(from: Date.now)
+    }
+    
+    func todaysDateString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        return formatter.string(from: Date())
+    }
 }
 
 #Preview {

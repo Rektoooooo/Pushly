@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC077ED32B14B5850091F110 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC077ED22B14B5850091F110 /* Color.swift */; };
-		EC0ADB522AF02D1500FE15D5 /* Pushly_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0ADB512AF02D1500FE15D5 /* Pushly_AppApp.swift */; };
+		EC0ADB522AF02D1500FE15D5 /* Pushly_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0ADB512AF02D1500FE15D5 /* Pushly_App.swift */; };
 		EC0ADB542AF02D1500FE15D5 /* SetUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0ADB532AF02D1500FE15D5 /* SetUpView.swift */; };
 		EC0ADB562AF02D1700FE15D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0ADB552AF02D1700FE15D5 /* Assets.xcassets */; };
 		EC0ADB592AF02D1700FE15D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC0ADB582AF02D1700FE15D5 /* Preview Assets.xcassets */; };
@@ -27,6 +27,8 @@
 		EC63C8392B28ECB500E14116 /* DayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63C8382B28ECB500E14116 /* DayData.swift */; };
 		EC8A7FBC2B0F3D93004B870A /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */; };
 		ECB23EAC2B25F59900686DA7 /* UserDefaultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */; };
+		ECCB64E02B67A4850004D113 /* UpdateLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCB64DF2B67A4850004D113 /* UpdateLogsView.swift */; };
+		ECF662372B7FF77E00E8CE4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF662362B7FF77E00E8CE4C /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +51,7 @@
 /* Begin PBXFileReference section */
 		EC077ED22B14B5850091F110 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		EC0ADB4E2AF02D1500FE15D5 /* Pushly App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pushly App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC0ADB512AF02D1500FE15D5 /* Pushly_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pushly_AppApp.swift; sourceTree = "<group>"; };
+		EC0ADB512AF02D1500FE15D5 /* Pushly_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pushly_App.swift; sourceTree = "<group>"; };
 		EC0ADB532AF02D1500FE15D5 /* SetUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpView.swift; sourceTree = "<group>"; };
 		EC0ADB552AF02D1700FE15D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC0ADB582AF02D1700FE15D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -70,6 +72,9 @@
 		EC63C8382B28ECB500E14116 /* DayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayData.swift; sourceTree = "<group>"; };
 		EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsView.swift; sourceTree = "<group>"; };
+		ECCB64DF2B67A4850004D113 /* UpdateLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLogsView.swift; sourceTree = "<group>"; };
+		ECF662352B7FD90A00E8CE4C /* Pushly-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Pushly-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		ECF662362B7FF77E00E8CE4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,13 +125,15 @@
 		EC0ADB502AF02D1500FE15D5 /* Pushly App */ = {
 			isa = PBXGroup;
 			children = (
-				EC0ADB512AF02D1500FE15D5 /* Pushly_AppApp.swift */,
+				ECF662352B7FD90A00E8CE4C /* Pushly-App-Info.plist */,
+				EC0ADB512AF02D1500FE15D5 /* Pushly_App.swift */,
+				ECF662362B7FF77E00E8CE4C /* AppDelegate.swift */,
 				EC0ADB7B2AF02F3900FE15D5 /* Config.swift */,
 				EC0ADB532AF02D1500FE15D5 /* SetUpView.swift */,
 				EC0ADB7D2AF04E4600FE15D5 /* StartedView.swift */,
 				EC3212EB2AF102620052D6FB /* ToolBar.swift */,
-				EC63C8332B2864C600E14116 /* Settings */,
 				EC63C8342B2864E000E14116 /* Calendar */,
+				EC63C8332B2864C600E14116 /* Settings */,
 				EC63C8352B28654000E14116 /* Extensions */,
 				EC0ADB572AF02D1700FE15D5 /* Preview Content */,
 			);
@@ -164,6 +171,7 @@
 			children = (
 				EC3212EF2AF105B40052D6FB /* SettingsView.swift */,
 				ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */,
+				ECCB64DF2B67A4850004D113 /* UpdateLogsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -322,18 +330,20 @@
 			files = (
 				EC63C8372B28666E00E14116 /* Day.swift in Sources */,
 				EC0ADB542AF02D1500FE15D5 /* SetUpView.swift in Sources */,
+				ECCB64E02B67A4850004D113 /* UpdateLogsView.swift in Sources */,
 				EC3212F02AF105B40052D6FB /* SettingsView.swift in Sources */,
 				EC3212EE2AF104D20052D6FB /* CalendarView.swift in Sources */,
 				EC3212EC2AF102620052D6FB /* ToolBar.swift in Sources */,
 				ECB23EAC2B25F59900686DA7 /* UserDefaultsView.swift in Sources */,
 				EC63C8392B28ECB500E14116 /* DayData.swift in Sources */,
-				EC0ADB522AF02D1500FE15D5 /* Pushly_AppApp.swift in Sources */,
+				EC0ADB522AF02D1500FE15D5 /* Pushly_App.swift in Sources */,
 				EC0ADB7E2AF04E4600FE15D5 /* StartedView.swift in Sources */,
 				EC3212F22AF23CA80052D6FB /* CalendarDayView.swift in Sources */,
 				EC3212EA2AF0F95D0052D6FB /* onFirstAppear.swift in Sources */,
 				EC2C4E952B0B7DB60095132F /* DayState.swift in Sources */,
 				EC077ED32B14B5850091F110 /* Color.swift in Sources */,
 				EC8A7FBC2B0F3D93004B870A /* CalendarViewModel.swift in Sources */,
+				ECF662372B7FF77E00E8CE4C /* AppDelegate.swift in Sources */,
 				EC0ADB7C2AF02F3900FE15D5 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +511,7 @@
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Pushly-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -530,6 +541,7 @@
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Pushly-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

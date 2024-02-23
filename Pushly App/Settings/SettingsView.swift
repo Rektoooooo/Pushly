@@ -13,10 +13,10 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section(header: Text("Starting count of exercises")) {
-                    Text(config.startingCount)
+                    Text("\(config.startingCount)")
                 }
                 Section(header: Text("Increment each day")) {
-                    Text(config.increment)
+                    Text("\(config.increment)")
                 }
                 Section(header: Text("Lenght of challange in days")) {
                     Text("\(config.lenght)")
@@ -27,8 +27,13 @@ struct SettingsView: View {
                 Section(header: Text("Progress days")) {
                     Text("\(config.dailyProgress)")
                 }
-                Section(header: Text("Compleated days")) {
-                    Text("\(config.completedDays.sorted().map { String($0) }.joined(separator: ", "))")
+//                Section(header: Text("Compleated days")) {
+//                    Text("\(config.completedDays.sorted().map { String($0) }.joined(separator: ", "))")
+//                }
+                Section(header: Text("Last updates logs")) {
+                    NavigationLink("Last updates logs") {
+                        UpdateLogsView()
+                    }
                 }
                 Section(header: Text("User defaults")) {
                     NavigationLink("User defaults") {
@@ -38,6 +43,12 @@ struct SettingsView: View {
             }
             .navigationTitle(Text("Settings"))
         }
+    }
+}
+
+func printUserDefaults() {
+    for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+        print("\(key) = \(value) \n")
     }
 }
 

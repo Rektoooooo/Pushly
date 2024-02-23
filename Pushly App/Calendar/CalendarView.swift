@@ -12,8 +12,9 @@ struct CalendarView: View {
     
     @EnvironmentObject var config: Config
     @StateObject var calendarViewModel = CalendarViewModel()
-    let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 8)
-    
+    let columns: [GridItem] = Array(repeating: .init(.flexible(),spacing: 1), count: 8)
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         @State var rowLenght:Int = Int(config.lenght)
         NavigationView {
@@ -24,13 +25,13 @@ struct CalendarView: View {
                         let state = calendarViewModel.dayStates[day] ?? determineStateForDay(UInt(day))
                         NavigationLink("\(day)"){
                             CalendarDayView(count: day, state: state)
-                               .modelContainer(for: Day.self)
+                            //   .modelContainer(for: Day.self)
                         }
-                        .frame(width: 30, height: 30)
-                        .font(.system(size: 16))
-                        .foregroundColor(.black)
+                        .frame(width: UIScreen.main.bounds.width * 0.075, height: UIScreen.main.bounds.height * 0.035)
+                        .font(.system(size: 15))
+                        .foregroundColor(colorScheme == .light ? .white : .black)
                         .fontWeight(.bold)
-                        .padding(2)
+                        .padding(1.5)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(backgroundColor(for: state), lineWidth: 4)
@@ -39,8 +40,6 @@ struct CalendarView: View {
                         .padding(3)
                     }
                 }
-
-                .id(UUID().uuidString)
                 .frame(width: UIScreen.main.bounds.width * 0.9)
                 .navigationTitle(Text("Your progress"))
             }
@@ -67,7 +66,7 @@ struct CalendarView: View {
               case .current:
                   return Color.gray
               case .upcoming:
-                  return Color.white
+                return Color.primary
           }
       }
 }
