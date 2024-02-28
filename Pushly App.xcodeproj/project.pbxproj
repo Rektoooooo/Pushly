@@ -25,6 +25,7 @@
 		EC3212F22AF23CA80052D6FB /* CalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3212F12AF23CA80052D6FB /* CalendarDayView.swift */; };
 		EC63C8372B28666E00E14116 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63C8362B28666E00E14116 /* Day.swift */; };
 		EC63C8392B28ECB500E14116 /* DayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63C8382B28ECB500E14116 /* DayData.swift */; };
+		EC6DECF42B8A95A80004D3D7 /* DaysDescriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6DECF32B8A95A80004D3D7 /* DaysDescriptionsView.swift */; };
 		EC8A7FBC2B0F3D93004B870A /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */; };
 		ECB23EAC2B25F59900686DA7 /* UserDefaultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */; };
 		ECCB64E02B67A4850004D113 /* UpdateLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCB64DF2B67A4850004D113 /* UpdateLogsView.swift */; };
@@ -70,6 +71,7 @@
 		EC3212F12AF23CA80052D6FB /* CalendarDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayView.swift; sourceTree = "<group>"; };
 		EC63C8362B28666E00E14116 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		EC63C8382B28ECB500E14116 /* DayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayData.swift; sourceTree = "<group>"; };
+		EC6DECF32B8A95A80004D3D7 /* DaysDescriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysDescriptionsView.swift; sourceTree = "<group>"; };
 		EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsView.swift; sourceTree = "<group>"; };
 		ECCB64DF2B67A4850004D113 /* UpdateLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLogsView.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				EC3212EF2AF105B40052D6FB /* SettingsView.swift */,
 				ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */,
 				ECCB64DF2B67A4850004D113 /* UpdateLogsView.swift */,
+				EC6DECF32B8A95A80004D3D7 /* DaysDescriptionsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			files = (
 				EC63C8372B28666E00E14116 /* Day.swift in Sources */,
 				EC0ADB542AF02D1500FE15D5 /* SetUpView.swift in Sources */,
+				EC6DECF42B8A95A80004D3D7 /* DaysDescriptionsView.swift in Sources */,
 				ECCB64E02B67A4850004D113 /* UpdateLogsView.swift in Sources */,
 				EC3212F02AF105B40052D6FB /* SettingsView.swift in Sources */,
 				EC3212EE2AF104D20052D6FB /* CalendarView.swift in Sources */,
@@ -512,11 +516,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pushly-App-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -542,11 +546,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pushly-App-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

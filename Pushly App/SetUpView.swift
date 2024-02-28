@@ -44,6 +44,11 @@ struct SetUpView: View {
                         .padding(.horizontal)
                 }
             }
+            .onAppear() {
+                startingCount = "20"
+                increment = "2"
+                challangeLenght = "100"
+            }
             .frame(height: UIScreen.main.bounds.height * 0.5)
             Button("Start Challange") {
                 startChallange()
@@ -67,12 +72,30 @@ struct SetUpView: View {
     }
     
     func fillDaysCollection() {
-            for i in 0..<Int(config.lenght + 1) {
-                config.daysDescription.insert(Day(dayNumber:UInt(i), status: "Upcoming",date: "Not compleated yet", dateCompleated: todaysDateString(days: Double(i)), repsCompleated: 0), at: i)
-            }
+        var tempDays: [Day] = []
+
+        for i in 1...100 {
+            let newDay = Day(dayNumber: UInt(i),
+                             status: "Upcoming",
+                             date: "Not completed yet",
+                             dateCompleated: todaysDateStringDay(days: Double(i)),
+                             repsCompleated: 0)
+            tempDays.append(newDay)
+        }
+
+        config.daysDescription = tempDays
+        saveDaysDescription()
     }
     
-    func todaysDateString(days: Double) -> String {
+    private func saveDaysDescription() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(config.daysDescription) {
+            UserDefaults.standard.set(encoded, forKey: "daysDescription")
+        }
+        print("Saved collection")
+    }
+    
+    func todaysDateStringDay(days: Double) -> String {
         let day:Double = 86400
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"

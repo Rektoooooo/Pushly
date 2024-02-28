@@ -11,7 +11,8 @@ import BackgroundTasks
 @main
 struct Pushly_App: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
+    @Environment(\.scenePhase) private var phase
+    
     init() {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { result, error in
@@ -28,10 +29,18 @@ struct Pushly_App: App {
             if config.challangeStarted {
                 ToolBar()
                     .environmentObject(config)
-
+                
             } else {
-                SetUpView(challangeLenght: "")
+                SetUpView()
                     .environmentObject(config)
+            }
+        }
+        .onChange(of: phase) { oldValue, newValue in
+            switch newValue {
+            case .background : Task {
+                await scheduleBackgroundNotification()
+            }
+            default : break
             }
         }
         .backgroundTask(.appRefresh("notification")) {
@@ -45,33 +54,33 @@ struct Pushly_App: App {
     func needNotification() -> Bool {
         let exercisesDone = UserDefaults.standard.integer(forKey: "completedPushups")
         let exercisesToday = UserDefaults.standard.integer(forKey: "dailyGoal")
-           if exercisesDone <= exercisesToday {
-               return true
-           } else {
-               return false
-           }
+        if exercisesDone <= exercisesToday {
+            return true
+        } else {
+            return false
+        }
     }
     
-
+    
     func scheduleBackgroundNotification() async {
         var notificationTime = DateComponents()
-        notificationTime.hour = 9
-        notificationTime.minute = 52 // Int.random(in: 0...59)
-
+        notificationTime.hour = 0
+        notificationTime.minute = 0 // Int.random(in: 0...59)
+        
         let calendar = Calendar.current
-
+        
         if let date = calendar.date(from: notificationTime) {
             let request = BGAppRefreshTaskRequest(identifier: "notification")
-                    request.earliestBeginDate = date
-                        do {
+            request.earliestBeginDate = date
+            do {
                 try BGTaskScheduler.shared.submit(request)
+                print("Schedul background task")
             } catch {
                 print("Could not schedule app refresh: \(error)")
             }
         }
-        print("Scheduled background task")
     }
-
+    
     func sendReminderNotification() async {
         
         let notificationTitles: [String] = [
@@ -104,7 +113,7 @@ struct Pushly_App: App {
         content.title = "\(notificationTitles.randomElement() ?? "Compleat your daily goal")"
         content.body = "\(notificationDescriptions.randomElement() ?? "Your daily goal hasen't been compleated yet, so get up and do it")"
         content.sound = UNNotificationSound.default
-
+        
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         do {
             try await UNUserNotificationCenter.current().add(request)

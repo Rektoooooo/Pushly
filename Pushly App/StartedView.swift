@@ -88,8 +88,6 @@ struct StartedView: View {
             Spacer()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-          //  config.lastUpdateDate = Date.init(timeIntervalSinceNow: -86400 * 2)
-          //  print("last date updated : \(config.lastUpdateDate)")
             refreshApp()
         }
         .onFirstAppear {
@@ -99,11 +97,11 @@ struct StartedView: View {
     }
     
     private func refreshApp() {
+        loadData()
         updateDailyChallengeIfNeeded()
         refreshTimer()
         updateExercisesToday()
         checkIfGoalCompleated()
-        loadData()
         print("App refreshed \(Date())")
     }
     
@@ -112,6 +110,7 @@ struct StartedView: View {
         if let savedDaysData = UserDefaults.standard.object(forKey: "daysDescription") as? Data {
             if let loadedDays = try? decoder.decode([Day].self, from: savedDaysData) {
                 config.daysDescription = loadedDays
+                print("Loaded data")
             }
         }
     }
@@ -162,6 +161,7 @@ struct StartedView: View {
         config.exercisesDone = 0
         config.lastUpdateDate = Date()
         config.updateLogs.append(Date.now)
+        fillMissingDays()
         print("Updated challange")
     }
     
@@ -187,12 +187,31 @@ struct StartedView: View {
         }
     }
     
-    func addDay(dayNumber: UInt) {
-        if config.exercisesDone >= config.exercisesToday {
-            config.daysDescription[Int(dayNumber)] = Day(dayNumber:config.dailyProgress, status: "Success",date: currentTimeString(), dateCompleated: todaysDateString(), repsCompleated: config.exercisesDone)
-            print("Inserted day at index : \(dayNumber)")
+    private func fillMissingDays() {
+        for i in 1..<config.dailyProgress + 1 {
+            if !config.completedDays.contains(i) && i <= config.dailyProgress {
+                    var day = config.daysDescription[Array<Day>.Index(i)]
+                    day.status = "Failed"
+                    day.date = "Failed"
+                    day.repsCompleated = 0
+                    print("Edited failed day at : \(i) ")
+            }
         }
     }
+    
+    func addDay(dayNumber: UInt) {
+        if config.exercisesDone >= config.exercisesToday {
+            if let existingIndex = config.daysDescription.firstIndex(where: { $0.dayNumber == dayNumber }) {
+                config.daysDescription[existingIndex] = Day(dayNumber: dayNumber, status: "Success", date: currentTimeString(), dateCompleated: todaysDateString(), repsCompleated: config.exercisesDone)
+            } else {
+                let newDay = Day(dayNumber: dayNumber, status: "Success", date: currentTimeString(), dateCompleated: todaysDateString(), repsCompleated: config.exercisesDone)
+                config.daysDescription.append(newDay)
+            }
+            print("Processed day at index: \(dayNumber)")
+        }
+    }
+
+
     
     func currentTimeString() -> String {
         let formatter = DateFormatter()
@@ -205,6 +224,13 @@ struct StartedView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         return formatter.string(from: Date())
+    }
+    
+    func todaysDateStringDay(days: Double) -> String {
+        let day:Double = 86400
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        return formatter.string(from: Date.now + (day * (days - 1)))
     }
 }
 

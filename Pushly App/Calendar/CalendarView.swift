@@ -44,6 +44,19 @@ struct CalendarView: View {
                 .navigationTitle(Text("Your progress"))
             }
         }
+        .onAppear() {
+            loadData()
+        }
+    }
+    
+    func loadData() {
+        let decoder = JSONDecoder()
+        if let savedDaysData = UserDefaults.standard.object(forKey: "daysDescription") as? Data {
+            if let loadedDays = try? decoder.decode([Day].self, from: savedDaysData) {
+                config.daysDescription = loadedDays
+                print("Loaded data")
+            }
+        }
     }
     
     func determineStateForDay(_ day: UInt) -> DayState {

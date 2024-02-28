@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct DaysDescriptionsView: View {
+    @EnvironmentObject var config: Config
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Section(header: Text("All descriptoons")) {
+                ForEach(Array(config.daysDescription.enumerated()), id: \.element.dayNumber) { index, day in
+                    Text("Day : \(index), Status : \(day.status), Date : \(day.dateCompleated),")
+                }
+            }
+        }
+        .navigationTitle("Days descriptions")
     }
 }
 
 #Preview {
     DaysDescriptionsView()
 }
+

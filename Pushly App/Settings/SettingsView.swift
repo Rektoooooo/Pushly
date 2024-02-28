@@ -35,6 +35,11 @@ struct SettingsView: View {
                         UpdateLogsView()
                     }
                 }
+                Section(header: Text("Days descriptions")) {
+                    NavigationLink("Days descriptions") {
+                        DaysDescriptionsView()
+                    }
+                }
                 Section(header: Text("User defaults")) {
                     NavigationLink("User defaults") {
                         UserDefaultsView()
