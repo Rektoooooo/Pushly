@@ -18,16 +18,16 @@ struct CalendarDayView: View {
         VStack {
             List {
                 Section(header: Text("Time of completion")) {
-                    Text("\(config.daysDescription[count - 1].date)")
+                    Text("\(config.days[count - 1].date)")
                 }
                 Section(header: Text("Date")) {
-                    Text("\(config.daysDescription[count - 1].dateCompleated)")
+                    Text("\(config.days[count - 1].dateCompleated)")
                 }
                 Section(header: Text("Repeticions done")) {
-                    Text("\(config.daysDescription[count - 1].repsCompleated)")
+                    Text("\(config.days[count - 1].repsCompleated)")
                 }
                 Section(header: Text("Day status")) {
-                    Text("\(config.daysDescription[count - 1].status)")
+                    Text("\(config.days[count - 1].status)")
                 }
             }
             .navigationTitle("Day \(count)")

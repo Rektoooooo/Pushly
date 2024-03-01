@@ -51,10 +51,10 @@ struct CalendarView: View {
     
     func loadData() {
         let decoder = JSONDecoder()
-        if let savedDaysData = UserDefaults.standard.object(forKey: "daysDescription") as? Data {
+        if let savedDaysData = UserDefaults.standard.object(forKey: "days") as? Data {
             if let loadedDays = try? decoder.decode([Day].self, from: savedDaysData) {
-                config.daysDescription = loadedDays
-                print("Loaded data")
+                config.days = loadedDays
+                debugPrint("Loaded data")
             }
         }
     }

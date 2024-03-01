@@ -75,16 +75,16 @@ class Config: ObservableObject {
         }
     }
     
-    @Published var daysDescription: Array<Day> {
+    @Published var days: Array<Day> {
             didSet {
                 let encoder = JSONEncoder()
-                if let encoded = try? encoder.encode(daysDescription) {
-                    UserDefaults.standard.set(encoded, forKey: "daysDescription")
+                if let encoded = try? encoder.encode(days) {
+                    UserDefaults.standard.set(encoded, forKey: "days")
                 }
         }
     }
 
-    init(challangeStarted: Bool, startingCount: UInt, increment: UInt, lenght: UInt, exercisesDone: UInt, dailyProgress: UInt, exercisesToday: UInt, lastUpdateDate: Date, completedDays: Set<UInt>,updateLogs: Array<Date>, daysDescription: [Day], sendNotification: Bool) {
+    init(challangeStarted: Bool, startingCount: UInt, increment: UInt, lenght: UInt, exercisesDone: UInt, dailyProgress: UInt, exercisesToday: UInt, lastUpdateDate: Date, completedDays: Set<UInt>,updateLogs: Array<Date>, days: [Day], sendNotification: Bool) {
             self.challangeStarted = UserDefaults.standard.object(forKey: "challangeStarted") as? Bool ?? false
             self.startingCount = UserDefaults.standard.object(forKey: "startingCount") as? UInt ?? 0
             self.increment = UserDefaults.standard.object(forKey: "increment") as? UInt ?? 0
@@ -93,9 +93,9 @@ class Config: ObservableObject {
             self.dailyProgress = UserDefaults.standard.object(forKey: "dailyProgress") as? UInt ?? 1
             self.exercisesToday = UserDefaults.standard.object(forKey: "exercisesToday") as? UInt ?? 0
             self.sendNotification = UserDefaults.standard.object(forKey: "sendNotification") as? Bool ?? true
-            self.lastUpdateDate = UserDefaults.standard.object(forKey: "lastUpdateDate") as? Date ?? Date.now
+            self.lastUpdateDate = UserDefaults.standard.object(forKey: "lastUpdateDate") as? Date ?? Date()
             self.updateLogs = UserDefaults.standard.object(forKey: "updateLogs") as? [Date] ?? [Date.now]
-            self.daysDescription = UserDefaults.standard.object(forKey: "daysDescription") as? [Day] ?? [Day(dayNumber:1, status: "Upcoming",date: "Not compleated yet", dateCompleated: "Not compleated yet", repsCompleated: 0)]
+            self.days = UserDefaults.standard.object(forKey: "days") as? [Day] ?? [Day(dayNumber:1, status: "Upcoming",date: "Not compleated yet", dateCompleated: "Not compleated yet", repsCompleated: 0)]
             let completedArray = UserDefaults.standard.array(forKey: "completedDays") as? [UInt] ?? []
             self.completedDays = Set(completedArray)
         }

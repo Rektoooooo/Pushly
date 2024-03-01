@@ -73,7 +73,7 @@ struct StartedView: View {
             Button(action: {
                 isValueChanged = false
                 refreshApp()
-                addDay(dayNumber: UInt(config.dailyProgress))
+                editDay()
             }, label: {
                 Text("Save")
                     .padding()
@@ -93,24 +93,24 @@ struct StartedView: View {
         .onFirstAppear {
             setTimer()
             refreshApp()
+            config.lastUpdateDate = Date()
         }
     }
     
     private func refreshApp() {
-        loadData()
         updateDailyChallengeIfNeeded()
         refreshTimer()
-        updateExercisesToday()
         checkIfGoalCompleated()
+        loadData()
+        updateExercisesToday()
         print("App refreshed \(Date())")
     }
-    
+    	
     func loadData() {
         let decoder = JSONDecoder()
-        if let savedDaysData = UserDefaults.standard.object(forKey: "daysDescription") as? Data {
+        if let savedDaysData = UserDefaults.standard.object(forKey: "days") as? Data {
             if let loadedDays = try? decoder.decode([Day].self, from: savedDaysData) {
-                config.daysDescription = loadedDays
-                print("Loaded data")
+                config.days = loadedDays
             }
         }
     }
@@ -148,20 +148,20 @@ struct StartedView: View {
         return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
     
-    func updateDailyChallengeIfNeeded() {
+    private func updateDailyChallengeIfNeeded() {
         let calendar = Calendar.current
         if !calendar.isDateInToday(config.lastUpdateDate) {
                 updateDailyChallenge()
-            }
+        }
     }
 
     private func updateDailyChallenge() {
-        updateExercisesToday()
         config.dailyProgress += numberOfNightsBetween(startDate: config.lastUpdateDate)
+        updateExercisesToday()
         config.exercisesDone = 0
-        config.lastUpdateDate = Date()
-        config.updateLogs.append(Date.now)
         fillMissingDays()
+        config.lastUpdateDate = Date()
+        config.updateLogs.append(config.lastUpdateDate)
         print("Updated challange")
     }
     
@@ -188,45 +188,56 @@ struct StartedView: View {
     }
     
     private func fillMissingDays() {
-        for i in 1..<config.dailyProgress + 1 {
-            if !config.completedDays.contains(i) && i <= config.dailyProgress {
-                    var day = config.daysDescription[Array<Day>.Index(i)]
+        for i in 0..<config.dailyProgress - 1 {
+            loadData()
+            let day = config.days[Int(i)]
+            if day.finished == false {
+                    debugPrint(day)
                     day.status = "Failed"
                     day.date = "Failed"
                     day.repsCompleated = 0
+                    saveDays()
                     print("Edited failed day at : \(i) ")
             }
         }
     }
     
-    func addDay(dayNumber: UInt) {
+    private func editDay() {
         if config.exercisesDone >= config.exercisesToday {
-            if let existingIndex = config.daysDescription.firstIndex(where: { $0.dayNumber == dayNumber }) {
-                config.daysDescription[existingIndex] = Day(dayNumber: dayNumber, status: "Success", date: currentTimeString(), dateCompleated: todaysDateString(), repsCompleated: config.exercisesDone)
-            } else {
-                let newDay = Day(dayNumber: dayNumber, status: "Success", date: currentTimeString(), dateCompleated: todaysDateString(), repsCompleated: config.exercisesDone)
-                config.daysDescription.append(newDay)
+            let day = config.days[Int(config.dailyProgress - 1)]
+                day.status = "Success"
+                day.date = currentTimeString()
+                day.repsCompleated = config.exercisesDone
+                day.finished = true
+                saveDays()
+                debugPrint(day)
+                print("Processed day at index: \(config.dailyProgress)")
             }
-            print("Processed day at index: \(dayNumber)")
+        
+        }
+    
+    private func saveDays() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(config.days) {
+            UserDefaults.standard.set(encoded, forKey: "days")
+            debugPrint("Saved collection")
         }
     }
-
-
     
-    func currentTimeString() -> String {
+    private func currentTimeString() -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
         formatter.dateStyle = .none
         return formatter.string(from: Date.now)
     }
     
-    func todaysDateString() -> String {
+    private func todaysDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         return formatter.string(from: Date())
     }
     
-    func todaysDateStringDay(days: Double) -> String {
+    private func todaysDateStringDay(days: Double) -> String {
         let day:Double = 86400
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"

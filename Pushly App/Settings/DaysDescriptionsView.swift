@@ -12,7 +12,7 @@ struct DaysDescriptionsView: View {
     var body: some View {
         List {
             Section(header: Text("All descriptoons")) {
-                ForEach(Array(config.daysDescription.enumerated()), id: \.element.dayNumber) { index, day in
+                ForEach(Array(config.days.enumerated()), id: \.element.dayNumber) { index, day in
                     Text("Day : \(index), Status : \(day.status), Date : \(day.dateCompleated),")
                 }
             }

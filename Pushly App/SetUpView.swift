@@ -73,8 +73,7 @@ struct SetUpView: View {
     
     func fillDaysCollection() {
         var tempDays: [Day] = []
-
-        for i in 1...100 {
+        for i in 1...config.lenght {
             let newDay = Day(dayNumber: UInt(i),
                              status: "Upcoming",
                              date: "Not completed yet",
@@ -82,15 +81,14 @@ struct SetUpView: View {
                              repsCompleated: 0)
             tempDays.append(newDay)
         }
-
-        config.daysDescription = tempDays
-        saveDaysDescription()
+        config.days = tempDays
+        saveDays()
     }
     
-    private func saveDaysDescription() {
+    private func saveDays() {
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(config.daysDescription) {
-            UserDefaults.standard.set(encoded, forKey: "daysDescription")
+        if let encoded = try? encoder.encode(config.days) {
+            UserDefaults.standard.set(encoded, forKey: "days")
         }
         print("Saved collection")
     }

@@ -27,9 +27,9 @@ struct SettingsView: View {
                 Section(header: Text("Progress days")) {
                     Text("\(config.dailyProgress)")
                 }
-//                Section(header: Text("Compleated days")) {
-//                    Text("\(config.completedDays.sorted().map { String($0) }.joined(separator: ", "))")
-//                }
+                Section(header: Text("Last update date")) {
+                    Text("\(config.lastUpdateDate)")
+                }
                 Section(header: Text("Last updates logs")) {
                     NavigationLink("Last updates logs") {
                         UpdateLogsView()

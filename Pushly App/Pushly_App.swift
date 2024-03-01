@@ -23,8 +23,8 @@ struct Pushly_App: App {
     }
     
     var body: some Scene {
-        let config = Config(challangeStarted: false, startingCount: 0, increment: 0, lenght: 0, exercisesDone: 0, dailyProgress: 0, exercisesToday: 0, lastUpdateDate: Date.now, completedDays: Set<UInt>(),updateLogs: Array<Date>(),
-                            daysDescription: [Day(dayNumber: 1, status: "Upcoming", date: "Not compleated yet", dateCompleated: "", repsCompleated: 0)], sendNotification: true)
+        let config = Config(challangeStarted: false, startingCount: 0, increment: 0, lenght: 0, exercisesDone: 0, dailyProgress: 0, exercisesToday: 0, lastUpdateDate: Date(), completedDays: Set<UInt>(),updateLogs: Array<Date>(),
+                            days: [Day(dayNumber: 1, status: "Upcoming", date: "Not compleated yet", dateCompleated: "", repsCompleated: 0)], sendNotification: true)
         WindowGroup {
             if config.challangeStarted {
                 ToolBar()
@@ -64,8 +64,8 @@ struct Pushly_App: App {
     
     func scheduleBackgroundNotification() async {
         var notificationTime = DateComponents()
-        notificationTime.hour = 0
-        notificationTime.minute = 0 // Int.random(in: 0...59)
+        notificationTime.hour = 20
+        notificationTime.minute = Int.random(in: 0...59)
         
         let calendar = Calendar.current
         
