@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum DayState: String {
-    case success
-    case failed
-    case current
-    case upcoming
+enum DayState: String, Codable {
+    case success = "Success"
+    case failed = "Failed"
+    case current = "Current"
+    case upcoming = "Upcoming"
 }

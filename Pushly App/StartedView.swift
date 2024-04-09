@@ -17,9 +17,6 @@ struct StartedView: View {
     @State var midnight:Date = Date()
     @State var isValueChanged: Bool = false
     
-//    @Query(sort:\Day.dayNumber, order: .forward) var days: [Day]
-//    @Environment(\.modelContext) var modelContext
-
     var body: some View {
         VStack {
             Text("Challange started")
@@ -50,7 +47,7 @@ struct StartedView: View {
                     .onChange(of: config.exercisesDone) { oldValue, newValue in
                         isValueChanged = true
                     }
-
+                
                 Button(action: {
                     if config.exercisesDone >= 0  {
                         config.exercisesDone += 1
@@ -74,12 +71,14 @@ struct StartedView: View {
                 isValueChanged = false
                 refreshApp()
                 editDay()
+                checkIfGoalCompleated()
+                editRepsDone()
             }, label: {
                 Text("Save")
                     .padding()
                     .padding(.leading,50)
                     .padding(.trailing,50)
-                    .background(isValueChanged ? Color .blue : Color .gray) 
+                    .background(isValueChanged ? Color .blue : Color .gray)
                     .foregroundColor(.white)
                     .cornerRadius(40)
                     .shadow(radius: 20)
@@ -93,24 +92,23 @@ struct StartedView: View {
         .onFirstAppear {
             setTimer()
             refreshApp()
-            config.lastUpdateDate = Date()
         }
     }
     
-    private func refreshApp() {
-        updateDailyChallengeIfNeeded()
-        refreshTimer()
-        checkIfGoalCompleated()
+    func refreshApp() {
         loadData()
         updateExercisesToday()
-        print("App refreshed \(Date())")
+        updateDailyChallengeIfNeeded()
+        refreshTimer()
+        debugPrint("App refreshed \(Date())")
     }
-    	
+    
     func loadData() {
         let decoder = JSONDecoder()
         if let savedDaysData = UserDefaults.standard.object(forKey: "days") as? Data {
             if let loadedDays = try? decoder.decode([Day].self, from: savedDaysData) {
                 config.days = loadedDays
+                debugPrint("Loaded data")
             }
         }
     }
@@ -123,7 +121,7 @@ struct StartedView: View {
     
     func printUserDefaults() {
         for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
-            print("\(key) = \(value) \n")
+            debugPrint("\(key) = \(value) \n")
         }
     }
     
@@ -133,7 +131,7 @@ struct StartedView: View {
         midnight = calendar.startOfDay(for: now).addingTimeInterval(24 * 60 * 60)
         self.timeRemaining = midnight.timeIntervalSince(now) + 1
     }
-
+    
     private func timeString(time: TimeInterval) -> String {
         let hours = Int(time) / 3600
         let minutes = (Int(time) / 60) % 60
@@ -151,18 +149,19 @@ struct StartedView: View {
     private func updateDailyChallengeIfNeeded() {
         let calendar = Calendar.current
         if !calendar.isDateInToday(config.lastUpdateDate) {
-                updateDailyChallenge()
+            updateDailyChallenge()
         }
     }
-
+    
     private func updateDailyChallenge() {
         config.dailyProgress += numberOfNightsBetween(startDate: config.lastUpdateDate)
         updateExercisesToday()
         config.exercisesDone = 0
         fillMissingDays()
+        currentDay()
         config.lastUpdateDate = Date()
         config.updateLogs.append(config.lastUpdateDate)
-        print("Updated challange")
+        debugPrint("Updated challange")
     }
     
     private func numberOfNightsBetween(startDate: Date) -> UInt {
@@ -176,7 +175,7 @@ struct StartedView: View {
     }
     
     private func updateExercisesToday() {
-        config.exercisesToday = config.startingCount + (config.increment * (config.dailyProgress - 1))
+        config.exercisesToday = config.startingCount + (config.increment * (config.dailyProgress))
     }
     
     private func checkIfGoalCompleated() {
@@ -188,33 +187,43 @@ struct StartedView: View {
     }
     
     private func fillMissingDays() {
-        for i in 0..<config.dailyProgress - 1 {
+        for i in 0..<config.dailyProgress {
             loadData()
             let day = config.days[Int(i)]
             if day.finished == false {
-                    debugPrint(day)
-                    day.status = "Failed"
-                    day.date = "Failed"
-                    day.repsCompleated = 0
-                    saveDays()
-                    print("Edited failed day at : \(i) ")
+                day.status = .failed
+                day.time = "Failed"
+                saveDays()
+                debugPrint("Edited failed day at : \(i) ")
             }
         }
     }
     
     private func editDay() {
         if config.exercisesDone >= config.exercisesToday {
-            let day = config.days[Int(config.dailyProgress - 1)]
-                day.status = "Success"
-                day.date = currentTimeString()
-                day.repsCompleated = config.exercisesDone
-                day.finished = true
-                saveDays()
-                debugPrint(day)
-                print("Processed day at index: \(config.dailyProgress)")
-            }
-        
+            let day = config.days[Int(config.dailyProgress)]
+            day.status = .success
+            day.time = currentTimeString()
+            day.repsCompleated = config.exercisesDone
+            day.finished = true
+            saveDays()
+            debugPrint(day)
+            debugPrint("Edited successful day at index: \(config.dailyProgress)")
         }
+    }
+    
+    private func currentDay() {
+            let day = config.days[Int(config.dailyProgress)]
+            day.status = .current
+            saveDays()
+            debugPrint("Edited current day at index: \(config.dailyProgress)")
+    }
+    
+    private func editRepsDone() {
+        let day = config.days[Int(config.dailyProgress)]
+        day.repsCompleated = config.exercisesDone
+        saveDays()
+    }
     
     private func saveDays() {
         let encoder = JSONEncoder()

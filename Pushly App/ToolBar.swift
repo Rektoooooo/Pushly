@@ -16,6 +16,7 @@ struct ToolBar: View {
                      .tabItem {
                        Label("Landing page", systemImage: "house")
                      }
+                     .navigationTitle("Challange in progress")
                      .tag(1)
 
                   CalendarView()

@@ -66,18 +66,22 @@ struct SetUpView: View {
         config.lenght = UInt(challangeLenght) ?? 0
         config.startingCount = UInt(startingCount) ?? 0
         config.increment = UInt(increment) ?? 0
-        config.exercisesToday = config.startingCount + (config.increment * config.dailyProgress)
+        config.exercisesToday = config.startingCount + (config.increment * config.dailyProgress + 1)
         fillDaysCollection()
-        print("Variables pushed to config")
+        config.lastUpdateDate = Date()
+        let day = config.days[Int(config.dailyProgress)]
+        day.status = .current
+        saveDays()
+        debugPrint("Variables pushed to config")
     }
     
     func fillDaysCollection() {
         var tempDays: [Day] = []
         for i in 1...config.lenght {
             let newDay = Day(dayNumber: UInt(i),
-                             status: "Upcoming",
-                             date: "Not completed yet",
-                             dateCompleated: todaysDateStringDay(days: Double(i)),
+                             status: .upcoming,
+                             time: "Not completed yet",
+                             date: todaysDateStringDay(days: Double(i)),
                              repsCompleated: 0)
             tempDays.append(newDay)
         }
@@ -90,7 +94,7 @@ struct SetUpView: View {
         if let encoded = try? encoder.encode(config.days) {
             UserDefaults.standard.set(encoded, forKey: "days")
         }
-        print("Saved collection")
+        debugPrint("Saved collection")
     }
     
     func todaysDateStringDay(days: Double) -> String {

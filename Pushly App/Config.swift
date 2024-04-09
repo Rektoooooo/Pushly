@@ -51,9 +51,9 @@ class Config: ObservableObject {
         }
     }
     
-    @Published var sendNotification: Bool {
+    @Published var isBackgroundFetchNeeded: Bool {
         didSet {
-            UserDefaults.standard.set(sendNotification, forKey: "sendNotification")
+            UserDefaults.standard.set(isBackgroundFetchNeeded, forKey: "isBackgroundFetchNeeded")
         }
     }
     
@@ -90,12 +90,12 @@ class Config: ObservableObject {
             self.increment = UserDefaults.standard.object(forKey: "increment") as? UInt ?? 0
             self.lenght = UserDefaults.standard.object(forKey: "lenght") as? UInt ?? 0
             self.exercisesDone = UserDefaults.standard.object(forKey: "exercisesDone") as? UInt ?? 0
-            self.dailyProgress = UserDefaults.standard.object(forKey: "dailyProgress") as? UInt ?? 1
+            self.dailyProgress = UserDefaults.standard.object(forKey: "dailyProgress") as? UInt ?? 0
             self.exercisesToday = UserDefaults.standard.object(forKey: "exercisesToday") as? UInt ?? 0
-            self.sendNotification = UserDefaults.standard.object(forKey: "sendNotification") as? Bool ?? true
+            self.isBackgroundFetchNeeded = UserDefaults.standard.object(forKey: "isBackgroundFetchNeeded") as? Bool ?? true
             self.lastUpdateDate = UserDefaults.standard.object(forKey: "lastUpdateDate") as? Date ?? Date()
             self.updateLogs = UserDefaults.standard.object(forKey: "updateLogs") as? [Date] ?? [Date.now]
-            self.days = UserDefaults.standard.object(forKey: "days") as? [Day] ?? [Day(dayNumber:1, status: "Upcoming",date: "Not compleated yet", dateCompleated: "Not compleated yet", repsCompleated: 0)]
+            self.days = UserDefaults.standard.object(forKey: "days") as? [Day] ?? [Day(dayNumber:1, status: .upcoming, time: "Not compleated yet", date: "Not compleated yet", repsCompleated: 0)]
             let completedArray = UserDefaults.standard.array(forKey: "completedDays") as? [UInt] ?? []
             self.completedDays = Set(completedArray)
         }
@@ -103,6 +103,10 @@ class Config: ObservableObject {
     func markDayAsComplete(day: UInt) {
         completedDays.insert(day)
         UserDefaults.standard.set(Array(completedDays), forKey: "completedDays")
+    }
+    
+    func toggleBackgroundFetch() {
+        isBackgroundFetchNeeded.toggle()
     }
 
 }

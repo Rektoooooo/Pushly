@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct ChallangeEndSumaryView: View {
+    @EnvironmentObject var config: Config
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Challange compleated")
+            Text("\(config.completedDays.count) / \(Int(config.lenght)) Days compleated")
+            Text("\((Double(Double(config.completedDays.count) / Double(config.lenght)) * 100).rounded())% Success rate")
+            Spacer()
+        }
+        .onAppear() {
+            debugPrint("\(config.completedDays.count) / \(Int(config.lenght))")
+            debugPrint((Float(Double(config.completedDays.count) / Double(config.lenght)) * 100).rounded())
+        }
     }
 }
 

@@ -11,16 +11,16 @@ struct DaysDescriptionsView: View {
     @EnvironmentObject var config: Config
     var body: some View {
         List {
-            Section(header: Text("All descriptoons")) {
+            Section(header: Text("All descriptions")) {
                 ForEach(Array(config.days.enumerated()), id: \.element.dayNumber) { index, day in
-                    Text("Day : \(index), Status : \(day.status), Date : \(day.dateCompleated),")
+                    Text("Day : \(index), Status : \(day.status.rawValue), Date : \(day.date),")
                 }
             }
         }
         .navigationTitle("Days descriptions")
     }
 }
-
+    
 #Preview {
     DaysDescriptionsView()
 }

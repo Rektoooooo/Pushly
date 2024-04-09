@@ -14,19 +14,20 @@ struct CalendarView: View {
     @StateObject var calendarViewModel = CalendarViewModel()
     let columns: [GridItem] = Array(repeating: .init(.flexible(),spacing: 1), count: 8)
     @Environment(\.colorScheme) var colorScheme
-
+    
     var body: some View {
-        @State var rowLenght:Int = Int(config.lenght)
+        @State var calendarLenght:Int = Int(config.lenght)
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 3) {
-                    ForEach(0..<rowLenght) { i in
-                        let day = i + 1
+                    ForEach(0..<calendarLenght) { day in
                         let state = calendarViewModel.dayStates[day] ?? determineStateForDay(UInt(day))
-                        NavigationLink("\(day)"){
+                        NavigationLink("\(day + 1)"){
                             CalendarDayView(count: day, state: state)
-                            //   .modelContainer(for: Day.self)
                         }
+                        .simultaneousGesture(TapGesture().onEnded {
+                            loadData()
+                         })
                         .frame(width: UIScreen.main.bounds.width * 0.075, height: UIScreen.main.bounds.height * 0.035)
                         .font(.system(size: 15))
                         .foregroundColor(colorScheme == .light ? .white : .black)
@@ -43,9 +44,6 @@ struct CalendarView: View {
                 .frame(width: UIScreen.main.bounds.width * 0.9)
                 .navigationTitle(Text("Your progress"))
             }
-        }
-        .onAppear() {
-            loadData()
         }
     }
     
@@ -66,22 +64,22 @@ struct CalendarView: View {
             return .failed
         } else if day == config.dailyProgress {
             return .current
-        } 
+        }
         return .upcoming
     }
     
     private func backgroundColor(for state: DayState) -> Color {
-          switch state {
-              case .success:
-                  return Color.green
-              case .failed:
-                  return Color.red
-              case .current:
-                  return Color.gray
-              case .upcoming:
-                return Color.primary
-          }
-      }
+        switch state {
+        case .success:
+            return Color.green
+        case .failed:
+            return Color.red
+        case .current:
+            return Color.gray
+        case .upcoming:
+            return Color.primary
+        }
+    }
 }
 
 #Preview {

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UserNotifications
+import GameKit
 
 struct SettingsView: View {
     @EnvironmentObject var config: Config
@@ -30,6 +32,11 @@ struct SettingsView: View {
                 Section(header: Text("Last update date")) {
                     Text("\(config.lastUpdateDate)")
                 }
+                Section(header: Text("Ending screen")) {
+                    NavigationLink("Ending screen") {
+                        ChallangeEndSumaryView(config: _config)
+                    }
+                }
                 Section(header: Text("Last updates logs")) {
                     NavigationLink("Last updates logs") {
                         UpdateLogsView()
@@ -45,6 +52,12 @@ struct SettingsView: View {
                         UserDefaultsView()
                     }
                 }
+                
+                Section(header: Text("User defaults")) {
+                    Button("Is bgf needed \(String(config.isBackgroundFetchNeeded))",
+                           action:  config.toggleBackgroundFetch )
+                }
+                
             }
             .navigationTitle(Text("Settings"))
         }
@@ -53,9 +66,10 @@ struct SettingsView: View {
 
 func printUserDefaults() {
     for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
-        print("\(key) = \(value) \n")
+        debugPrint("\(key) = \(value) \n")
     }
 }
+
 
 #Preview {
     SettingsView()

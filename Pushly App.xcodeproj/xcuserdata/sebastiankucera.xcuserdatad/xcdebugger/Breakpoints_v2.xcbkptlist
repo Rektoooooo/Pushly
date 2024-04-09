@@ -36,5 +36,68 @@
             landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3C75D75-AA71-45F5-99DE-D0F4F0E48C85"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pushly App/Pushly_App.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "A3C75D75-AA71-45F5-99DE-D0F4F0E48C85 - a930063ea8978823"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #3 @Sendable () async -&gt; () in Pushly_App.Pushly_App.body.getter : some"
+                  moduleName = "Pushly App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sebastiankucera/Documents/Pushly/Pushly%20App/Pushly_App.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "A3C75D75-AA71-45F5-99DE-D0F4F0E48C85 - ca351ffe7afaea20"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) suspend resume partial function for closure #3 @Sendable () async -&gt; () in Pushly_App.Pushly_App.body.getter : some"
+                  moduleName = "Pushly App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sebastiankucera/Documents/Pushly/Pushly%20App/Pushly_App.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "A3C75D75-AA71-45F5-99DE-D0F4F0E48C85 - f72e17bdd5494c21"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #3 @Sendable () async -&gt; () in Pushly_App.Pushly_App.body.getter : some"
+                  moduleName = "Pushly App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sebastiankucera/Documents/Pushly/Pushly%20App/Pushly_App.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

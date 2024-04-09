@@ -29,6 +29,7 @@
 		EC8A7FBC2B0F3D93004B870A /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */; };
 		ECB23EAC2B25F59900686DA7 /* UserDefaultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */; };
 		ECCB64E02B67A4850004D113 /* UpdateLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCB64DF2B67A4850004D113 /* UpdateLogsView.swift */; };
+		ECF57ED82B98B66800C1439E /* ChallangeEndSumaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF57ED72B98B66800C1439E /* ChallangeEndSumaryView.swift */; };
 		ECF662372B7FF77E00E8CE4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF662362B7FF77E00E8CE4C /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		EC8A7FBB2B0F3D93004B870A /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		ECB23EAB2B25F59900686DA7 /* UserDefaultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsView.swift; sourceTree = "<group>"; };
 		ECCB64DF2B67A4850004D113 /* UpdateLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLogsView.swift; sourceTree = "<group>"; };
+		ECF57ED72B98B66800C1439E /* ChallangeEndSumaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallangeEndSumaryView.swift; sourceTree = "<group>"; };
 		ECF662352B7FD90A00E8CE4C /* Pushly-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Pushly-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		ECF662362B7FF77E00E8CE4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +136,7 @@
 				EC0ADB532AF02D1500FE15D5 /* SetUpView.swift */,
 				EC0ADB7D2AF04E4600FE15D5 /* StartedView.swift */,
 				EC3212EB2AF102620052D6FB /* ToolBar.swift */,
+				ECF57ED62B98B64A00C1439E /* Ending */,
 				EC63C8342B2864E000E14116 /* Calendar */,
 				EC63C8332B2864C600E14116 /* Settings */,
 				EC63C8352B28654000E14116 /* Extensions */,
@@ -199,6 +202,14 @@
 				EC077ED22B14B5850091F110 /* Color.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ECF57ED62B98B64A00C1439E /* Ending */ = {
+			isa = PBXGroup;
+			children = (
+				ECF57ED72B98B66800C1439E /* ChallangeEndSumaryView.swift */,
+			);
+			path = Ending;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +356,7 @@
 				EC3212F22AF23CA80052D6FB /* CalendarDayView.swift in Sources */,
 				EC3212EA2AF0F95D0052D6FB /* onFirstAppear.swift in Sources */,
 				EC2C4E952B0B7DB60095132F /* DayState.swift in Sources */,
+				ECF57ED82B98B66800C1439E /* ChallangeEndSumaryView.swift in Sources */,
 				EC077ED32B14B5850091F110 /* Color.swift in Sources */,
 				EC8A7FBC2B0F3D93004B870A /* CalendarViewModel.swift in Sources */,
 				ECF662372B7FF77E00E8CE4C /* AppDelegate.swift in Sources */,
@@ -509,6 +521,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Pushly App/Preview Content\"";
@@ -516,11 +529,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pushly-App-Info.plist";
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -530,7 +543,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -539,6 +552,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Pushly App/Preview Content\"";
@@ -546,11 +560,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Pushly-App-Info.plist";
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -560,7 +574,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
