@@ -11,4 +11,4 @@
 </div>
 
 # Summerise at the end how well you have done
-<img src="https://github.com/Rektoooooo/Pushly/blob/main/Repo%20photos/IMG_6994.PNG" width="256">
+<img src="https://github.com/Rektoooooo/Pushly/blob/main/Repo%20photos/IMG_6995.PNG" width="256">
